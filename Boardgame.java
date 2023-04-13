@@ -1,4 +1,7 @@
 import java.util.*; 
+/**
+ * This class implements the Contract class as its interface. It does a variety of things regarding when someone is hosting a game night. 
+ */
 public class Boardgame implements Contract{ 
     
     private ArrayList<String> players;  
@@ -10,7 +13,18 @@ public class Boardgame implements Contract{
     Number nGames; 
     Double time; 
 
-    public Boardgame(ArrayList players, ArrayList games, String game, Boolean forward,
+    /**
+     * Constructor for the Boardgame class. 
+     * @param players A list of the players during game night. 
+     * @param games A list of the current boardgames inventory. 
+     * @param guest A guest at the boardgame night. 
+     * @param game The current game being played. 
+     * @param forward If the direction of the game is going forward or not.
+     * @param backwards if the direction of the game is going backwards.
+     * @param nGames The number of games in the host's inventory of games. 
+     * @param time The current time during game night. 
+     */
+    public Boardgame(ArrayList<String> players, ArrayList<String> games, String game, Boolean forward,
     Boolean backwards, Number nGames, Double time, String guest){
         this.players = new ArrayList<String>();  
         this.games = new ArrayList<String>(); 
@@ -24,11 +38,12 @@ public class Boardgame implements Contract{
 
     
     /**
-     * stores item (boardgame in this case) that is being grabbed to play
+     * Method that stores item (boardgame in this case) that was already grabbed to play.
+     * @param item The item in this case the boardgame that is being grabbed/updated in the inventory. 
      */
     public void grab(String item){
         if (this.games.contains(item)) {
-            throw new RuntimeException("This boardgame is already apart of your game night!!")
+            throw new RuntimeException("This boardgame is already apart of your game night!!"); 
         }
         if (!this.games.contains(item)){
             this.games.add(item); 
@@ -37,7 +52,9 @@ public class Boardgame implements Contract{
     }
 
     /**
-     * Drops a game from someone's collection if they dno longer want to play this and returns the string version of that list. 
+     * Drops a game from someone's collection if they dno longer want to play this and returns the string version of the current inventory of boardgames list.
+     * @param item The boardgame that is being dropped from the inventory. 
+     * @return The String version of the array list of the current inventory of boardgames.  
      */
     public String drop(String item){
         if (!this.games.contains(item)){
@@ -52,21 +69,24 @@ public class Boardgame implements Contract{
     }
 
     /** 
-     * assigns that the current game being played/examine is the item 
+     * Assigns that the current game being played/examined is the item. 
+     * @param item The boardgame being used/played at boardgame night. 
      */
     public void examine(String item){
         this.game = item; 
     }
 
     /**
-     * removes a game from the current inventory of games when one is currently being used. 
+     * Removes a game from the current inventory of games when one is currently being used. 
+     * @param item The boardgame being played right now
      */
     public void use(String item){
         this.games.remove(item); 
     }
 
     /**
-     * if walking is forward thaen returns true but if going backwards then returns false (in the boardgame)
+     * If the 'walking' is forward in the game then this method returns true but if the boardgame 'walking' is going backwards then returns false (in the boardgame). 
+     * @param direction The direction of the boardgame. 
      */
     public boolean walk(String direction){
         if (this.forward) {
@@ -77,7 +97,7 @@ public class Boardgame implements Contract{
     }
 
     /**
-     * if this a boardgame where you fly a little plan, if it goes less than one feet in the air and or less than one feet across then it did not fly successfully. 
+     * This is for a boardgame where you fly a little plane/figurine. If it goes less than one feet in the air and or less than one feet across then it did not fly successfully. 
      */
     public boolean fly(int x, int y){
         if (y >= 1){
@@ -90,7 +110,7 @@ public class Boardgame implements Contract{
     }
 
     /**
-     * returns the number of games after you shrink the collection of your boardgames to 0. 
+     * Returns the number of games after you shrink the collection of your boardgames to 0. 
      */
     public Number shrink(){
         this.nGames = 0; 
@@ -111,10 +131,10 @@ public class Boardgame implements Contract{
      */
     public void rest(){
         if(this.time > 24) {
-            throw new RuntimeException("You picked a military time that doesn't exist!! Please use a valid time!")
+            throw new RuntimeException("You picked a military time that doesn't exist!! Please use a valid time!");
         }
         if(this.time >= 23){
-            System.out.println("It is time to go home and rest! Game night is unfortunately over :()")
+            System.out.println("It is time to go home and rest! Game night is unfortunately over :()");
         }
         if(this.time <= 23){
             System.out.println("Looks like the party can still keep going!!"); 
@@ -130,8 +150,11 @@ public class Boardgame implements Contract{
         }
         if (!this.players.contains(this.guest)){
             this.players.add(guest); 
-            System.out.println("Oh no! It looks like a guest was not recording any games. Do not worry! We have added them to the list of players.")
+            System.out.println("Oh no! It looks like a guest was not recording any games. Do not worry! We have added them to the list of players.");
         }
+    }
+
+    public static void main(String [] args){
     }
 
 
